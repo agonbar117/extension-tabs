@@ -3,7 +3,7 @@
     "name": "Cosa de pestañas",
     "description" : "Mi vida es una miseria",
     "version": "1.0",
-    "permissions": ["tabs"],
+    "permissions": ["tabs","downloads"],
     "browser_action": {
         "default_icon": "icon.png"
     },

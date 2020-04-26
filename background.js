@@ -1,7 +1,6 @@
 "use strict"
 let tabActual={};
 let resultado=[];
-
 chrome.browserAction.onClicked.addListener(btnClicked)
 
 function btnClicked() {
@@ -14,6 +13,12 @@ function btnClicked() {
 
             resultado.push(tabActual);
         }
+        let blob= new Blob(resultado);
+        let url= URL.createObjectURL(blob);
+        chrome.downloads.download({
+            url:url,
+            saveAs:true
+        });
     });
 }
 
