@@ -5,13 +5,12 @@ chrome.browserAction.onClicked.addListener(btnClicked)
 
 function btnClicked() {
     let querying = chrome.tabs.query({}, function logTabs(tabs) {
-        for (let tab of tabs) {
+        for (let tab of tabs) {            
             tabActual={
-                Nombre: tab.title,
-                URL: tab.url
-            }
-
-            resultado.push(tabActual);
+            Nombre: tab.title,
+            URL: tab.url
+        }
+        resultado.push(tabActual);
         }
         let blob= new Blob([resultado], {type: "text/html"});
         let url= URL.createObjectURL(blob);
