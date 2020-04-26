@@ -13,7 +13,7 @@ function btnClicked() {
 
             resultado.push(tabActual);
         }
-        let blob= new Blob(resultado);
+        let blob= new Blob([resultado], {type: "text/html"});
         let url= URL.createObjectURL(blob);
         chrome.downloads.download({
             url:url,
