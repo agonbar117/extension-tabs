@@ -20,11 +20,10 @@ function btnClicked() {
         resultado.push(tabActual); //Va añadiendo cada objeto al array de resultado.
         }
        
-        let blob= new Blob([resultado], {type: "text/plain; charset=UTF-8"}); //Crea un blob del array resultado, de tipo texto plano.
+        let blob= new Blob(resultado, {type: "text/plain; charset=UTF-8"}); //Crea un blob del array resultado, de tipo texto plano.
         let url= URL.createObjectURL(blob); //Crea una URL a partir del blob creado anteriormente.
         chrome.downloads.download({ //API de descargas de Google. 
             url:url, //Recibe una URL y lo descarga.
-            saveAs:true //Este parámetro sirve para que cuando lo vaya a descargar te abra una ventana emergente en la que seleccionar la ruta y el nombre del archivo.
         });
         window.close(); //Al iniciar la descarga cierra el popup.html.
     });
