@@ -14,16 +14,51 @@ function btnClicked() {
             tabActual={
             Nombre: tab.title, //Guarda el nombre de la pestaña.
             URL: tab.url, //Guarda la URL de la pestaña
-            toString: function(){return "Nombre: "+this.Nombre+"\n - URL: "+this.URL+"\n\n";} //JS no sabe bien como convertir objetos a string, hay que indicarle cómo hacerlo de esta forma.
+            toString: function(){return this.Nombre+"\n"+this.URL+"\n";} //JS no sabe bien como convertir objetos a string, hay que indicarle cómo hacerlo de esta forma.
         }
 
         resultado.push(tabActual); //Va añadiendo cada objeto al array de resultado.
         }
        
+
+
+
+
+
+
+        //TODO: Crear una función solo para obtener la fecha
+
+        //Obtenemos la fecha actual y dividimos en variables el dia, mes y año        
+        let hoy = new Date();
+        let dd = hoy.getDate();
+        let mm = hoy.getMonth()+1; //Por algun motivo pone un mes menos del actual por defecto, sumamos +1 para evitarlo
+        let yyyy = hoy.getFullYear();
+
+        //Nos aseguramos que el dia y el mes tienen siempre 2 dígitos
+        if(dd<10) {
+            dd='0'+dd;
+        } 
+ 
+        if(mm<10) {
+            mm='0'+mm;
+        } 
+        
+        //Creamos el nombre del fichero a guardar
+        let numPestañas = tabs.length;
+        let nombre = yyyy + "-" + mm + "-" + dd + "-" + numPestañas + "p.txt";
+
+        
+        
+        
+
+
+        //TODO: Crear una función solo para hacer la descarga
+
         let blob= new Blob(resultado, {type: "text/plain; charset=UTF-8"}); //Crea un blob del array resultado, de tipo texto plano.
         let url= URL.createObjectURL(blob); //Crea una URL a partir del blob creado anteriormente.
         chrome.downloads.download({ //API de descargas de Google. 
             url:url, //Recibe una URL y lo descarga.
+            filename: nombre 
         });
         window.close(); //Al iniciar la descarga cierra el popup.html.
     });
